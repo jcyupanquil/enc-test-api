@@ -6,6 +6,7 @@ import com.example.demo.controller.dto.OrderDTO;
 import com.example.demo.repository.OrdersRepository;
 import com.example.demo.repository.entity.OrderEntity;
 import com.example.demo.service.mapper.OrdersMapper;
+import com.example.demo.util.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -94,7 +95,7 @@ class OrdersServiceImplTest
     {
         when(repository.findById(anyLong())).thenReturn(Optional.empty());
 
-        assertThrows(NullPointerException.class, () -> service.getOrder(1L));
+        assertThrows(ResourceNotFoundException.class, () -> service.getOrder(1L));
 
         verify(repository).findById(1L);
     }

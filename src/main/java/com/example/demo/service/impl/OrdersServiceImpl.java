@@ -7,6 +7,7 @@ import com.example.demo.repository.OrdersRepository;
 import com.example.demo.repository.entity.OrderEntity;
 import com.example.demo.service.OrdersService;
 import com.example.demo.service.mapper.OrdersMapper;
+import com.example.demo.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -28,7 +29,7 @@ public class OrdersServiceImpl implements OrdersService
     public OrderDTO getOrder(Long orderId)
     {
         OrderEntity entity = repository.findById(orderId)
-                .orElseThrow(NullPointerException::new);
+                .orElseThrow(ResourceNotFoundException::new);
         return mapper.mapEntityToDTO(entity);
     }
 }
